@@ -1,5 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import PlaylistItemCard from "@/components/PlaylistItemCard.astro";
+
+import { playlists } from "@/lib/data";
 ---
 
 <Layout title="Spotify Clone">
@@ -10,7 +13,8 @@ import Layout from "../layouts/Layout.astro";
     <!-- >PageHeader />  -->
     <div class="relative z-10 px-6">
       <!-- <Greetings />  -->
-      <div>h</div>
+      <h1 class="text-4xl">Good night</h1>
+      {playlists.map((playlist) => <PlaylistItemCard playlist={playlist} />)}
     </div>
   </div>
 </Layout>
