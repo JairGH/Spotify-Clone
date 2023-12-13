@@ -41,7 +41,7 @@ export function Player() {
           </button>
         </div>
       </div>
-      <div className="">Volume</div>
+      <div className="grid place-content-center">Volume</div>
     </div>
   );
 }
