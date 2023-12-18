@@ -1,4 +1,5 @@
 import { usePlayerStore } from "@/store/playerStore";
+import { useEffect, useRef } from "react";
 
 export const Pause = ({ className }) => (
   <svg
@@ -30,6 +31,22 @@ export function Player() {
   const { currentMusic, isPlaying, setIsPlaying, volume } = usePlayerStore(
     (state) => state
   );
+  const audioRef = useRef();
+
+  useEffect(() => {
+    isPlaying ? audioRef.current.play() : audioRef.current.pause();
+  }, [isPlaying]);
+
+  useEffect(() => {
+    const { song, playlist, songs } = currentMusic;
+    if (song) {
+      const src = `/music/${playlist?.id}/0${song.id}.mp3`;
+      audioRef.current.src = src;
+      audioRef.current.volume = volume;
+      audioRef.current.play();
+    }
+  }, [currentMusic]);
+
   const handleClick = () => {
     setIsPlaying(!isPlaying);
   };
@@ -42,6 +59,7 @@ export function Player() {
           <button className="bg-white rounded-full p-2" onClick={handleClick}>
             {isPlaying ? <Pause /> : <Play />}
           </button>
+          <audio ref={audioRef} />
         </div>
       </div>
       <div className="grid place-content-center">Volume</div>
