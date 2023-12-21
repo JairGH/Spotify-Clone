@@ -81,17 +81,24 @@ const SongControl = ({ audio }) => {
     return () => {
       audio.current.removeEventListener("timeupdate", handleTimeUpdate);
     };
-  });
+  }, []);
 
   const handleTimeUpdate = () => {
     setCurrentTime(audio.current.currentTime);
   };
 
+  const formatTime = (time) => {
+    if (time == 0) return "0:00";
+
+    const seconds = Math.floor(time % 60);
+    const minutes = Math.floor(time / 60);
+  };
+
   const duration = audio?.current?.duration ?? 0;
 
   return (
-    <div className="">
-      <span>{currentTime}</span>
+    <div className="flex gap-x-3 text-xs pt-2">
+      <span className="opacity-50">{currentTime}</span>
       <Slider
         defaultValue={[0]}
         value={[currentTime]}
@@ -102,7 +109,7 @@ const SongControl = ({ audio }) => {
           audio.current.currentTime = value;
         }}
       />
-      <span>{duration}</span>
+      <span className="opacity-50">{duration}</span>
     </div>
   );
 };
