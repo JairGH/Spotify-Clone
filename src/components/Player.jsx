@@ -78,6 +78,7 @@ const SongControl = ({ audio }) => {
 
   useEffect(() => {
     audio.current.addEventListener("timeupdate", handleTimeUpdate);
+
     return () => {
       audio.current.removeEventListener("timeupdate", handleTimeUpdate);
     };
@@ -184,7 +185,6 @@ export function Player() {
   const handleClick = () => {
     setIsPlaying(!isPlaying);
   };
-
   return (
     <div className="flex flex-row justify-between w-full px-4 z-50">
       <CurrentSong {...currentMusic.song} />
