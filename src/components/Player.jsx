@@ -73,6 +73,40 @@ const CurrentSong = ({ image, title, artists }) => {
   );
 };
 
+const SongControl = ({ audio }) => {
+  const [currentTime, setCurrentTime] = useState(0);
+
+  useEffect(() => {
+    audio.current.addEventListener("timeupdate", handleTimeUpdate);
+    return () => {
+      audio.current.removeEventListener("timeupdate", handleTimeUpdate);
+    };
+  });
+
+  const handleTimeUpdate = () => {
+    setCurrentTime(audio.current.currentTime);
+  };
+
+  const duration = audio?.current?.duration ?? 0;
+
+  return (
+    <div className="">
+      <span>{currentTime}</span>
+      <Slider
+        defaultValue={[0]}
+        value={[currentTime]}
+        max={audio?.current?.duration ?? 0}
+        min={0}
+        className="w-[450px]"
+        onValueChange={(value) => {
+          audio.current.currentTime = value;
+        }}
+      />
+      <span>{duration}</span>
+    </div>
+  );
+};
+
 const VolumeControl = () => {
   const volume = usePlayerStore((state) => state.volume);
   const setVolume = usePlayerStore((state) => state.setVolume);
@@ -150,6 +184,7 @@ export function Player() {
           <button className="bg-white rounded-full p-2" onClick={handleClick}>
             {isPlaying ? <Pause /> : <Play />}
           </button>
+          <SongControl audio={audioRef} />
           <audio ref={audioRef} />
         </div>
       </div>
