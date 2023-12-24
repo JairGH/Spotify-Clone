@@ -89,7 +89,7 @@ const SongControl = ({ audio }) => {
   };
 
   const formatTime = (time) => {
-    if (time == null) return "0:00";
+    if (time == null) return `0:00`;
 
     const seconds = Math.floor(time % 60);
     const minutes = Math.floor(time / 60);
