@@ -101,7 +101,9 @@ const SongControl = ({ audio }) => {
 
   return (
     <div className="flex gap-x-3 text-xs pt-2">
-      <span className="opacity-50">{formatTime(currentTime)}</span>
+      <span className="opacity-50 w-12 text-right">
+        {formatTime(currentTime)}
+      </span>
       <Slider
         defaultValue={[0]}
         value={[currentTime]}
@@ -112,7 +114,9 @@ const SongControl = ({ audio }) => {
           audio.current.currentTime = value;
         }}
       />
-      <span className="opacity-50">{formatTime(duration)}</span>
+      <span className="opacity-50 w-12">
+        {duration ? formatTime(duration) : "0:00"}
+      </span>
     </div>
   );
 };
@@ -134,7 +138,7 @@ const VolumeControl = () => {
   };
 
   return (
-    <div className="flex justify-center gap-x-2 text-white">
+    <div className="flex justify-center gap-x-2 text-white mr-8 mt-6">
       <button
         className="opacity-70 hover:opacity-100 transition"
         onClick={handleClickVolume}
@@ -186,8 +190,11 @@ export function Player() {
     setIsPlaying(!isPlaying);
   };
   return (
-    <div className="flex flex-row justify-between w-full px-4 z-50">
-      <CurrentSong {...currentMusic.song} />
+    <div className="flex flex-row justify-between w-full px-1 z-50">
+      <div className="w-[200px]">
+        <CurrentSong {...currentMusic.song} />
+      </div>
+
       <div className="grid place-content-center gap-4 flex-1">
         <div className="flex justify-center flex-col items-center">
           <button className="bg-white rounded-full p-2" onClick={handleClick}>
@@ -197,7 +204,8 @@ export function Player() {
           <audio ref={audioRef} />
         </div>
       </div>
-      <div className="grid place-content-center mr-4">
+
+      <div className="grid place-content-center">
         <VolumeControl />
       </div>
     </div>
