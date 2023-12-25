@@ -9,7 +9,7 @@ interface Props {
 const { songs } = Astro.props;
 ---
 
-<table class="table-auto text-left min-w-full divide-y-2 divide-gray-500/50">
+<table class="table-auto text-left min-w-full divide-y divide-gray-500/20">
   <thead class="">
     <tr class="text-gray-300 text-sm font-light">
       <th class="px-4 py-2">#</th>
@@ -19,10 +19,11 @@ const { songs } = Astro.props;
     </tr>
   </thead>
   <tbody>
+    <tr class="h-[16px]"></tr>
     {
       songs.map((song, index) => (
-        <tr class="text-gray-300 text-sm font-light">
-          <td class="px-4 py-2">{index + 1}</td>
+        <tr class=" text-gray-300 text-sm font-light hover:bg-white/10 rounded-lg transition duration-300 ">
+          <td class="px-4 py-2 rounded-tl-lg rounded-bl-lg">{index + 1}</td>
           <td class="px-4 py-2 flex gap-3">
             <picture class="">
               <img
@@ -37,7 +38,7 @@ const { songs } = Astro.props;
             </div>
           </td>
           <td class="px-4 py-2">{song.album}</td>
-          <td class="px-4 py-2">{song.duration}</td>
+          <td class="px-4 py-2 rounded-tr-lg rounded-br-lg">{song.duration}</td>
         </tr>
       ))
     }
