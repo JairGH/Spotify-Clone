@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 
 import { allPlaylists, songs } from "@/lib/data";
+import MusicTable from "@/components/MusicTable.astro";
 
 const { id } = Astro.params;
 
@@ -57,6 +58,7 @@ const playListSongs = songs.filter(
       class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/80 -z-10"
     >
     </div>
+    <MusicTable songs={playListSongs} />
   </div>
 </Layout>
 <style></style>
