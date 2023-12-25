@@ -1,5 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { CardPlayBtn } from "@/components/CardPlayBtn";
 
 import { allPlaylists, songs } from "@/lib/data";
 import MusicTable from "@/components/MusicTable.astro";
@@ -46,12 +47,16 @@ const playListSongs = songs.filter(
             </div>
             <p class="mt-1">
               <span class="text-white">{playListSongs.length} songs</span>,
-              abour 1 hr
+              about 1 hr
             </p>
           </div>
         </div>
       </div>
     </header>
+
+    <div class="pt-6 pl-6">
+      <CardPlayBtn id={id} client:load size="large" />
+    </div>
 
     <div class="relative z-10 px-6 pt-10"></div>
     <div
